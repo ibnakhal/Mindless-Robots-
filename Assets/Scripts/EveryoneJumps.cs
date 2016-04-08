@@ -1,10 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
-
+using System.Collections.Generic;
 public class EveryoneJumps : MonoBehaviour {
 
     [SerializeField]
-    private GameObject[] bots;
+    public List<GameObject> bots;
     [SerializeField]
     private DroneMovement move;
     [SerializeField]
@@ -22,11 +22,10 @@ public class EveryoneJumps : MonoBehaviour {
 		if (Input.GetKey(KeyCode.Space)) 
 		{
             Debug.Log("Jump!");
-            bots = GameObject.FindGameObjectsWithTag("Flock");
-            
-            for(int x=0; x< bots.Length; x++)
+           
+            foreach (GameObject bot in bots)
             {
-                bots[x].GetComponent<DroneMovement>().Jump(jumpSpeed);
+                bot.GetComponent<DroneMovement>().Jump(jumpSpeed);
             }
 
 		}
