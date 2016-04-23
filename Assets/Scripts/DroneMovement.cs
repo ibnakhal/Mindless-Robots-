@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using System.Collections;
-
 public class DroneMovement : MonoBehaviour {
 
 
@@ -12,7 +11,7 @@ public class DroneMovement : MonoBehaviour {
     [SerializeField]
     private Vector3 velocity = Vector3.zero;
     [SerializeField]
-    private CharacterController controller = null;
+    private bool isGrounded;
 
 
     [Header("Effects")]
@@ -21,15 +20,30 @@ public class DroneMovement : MonoBehaviour {
 	// Use this for initialization
 	void Start () 
     {
-        controller = this.GetComponent<CharacterController>();
+        
 	}
 
+    public void OnCollisionEnter2D(Collision2D collided)
+    {
+        print(collided.collider.tag);
+        if(collided.collider.gameObject.tag == "Floor")
+        {
+            isGrounded = true;
+        }
+    }
+    public void OnCollisionExit2D(Collision2D collided)
+    {
+        if (collided.gameObject.tag == "Floor")
+        {
+            isGrounded = false;
+        }
+    }
     public void ZeroOutVelocity()
     {
         velocity.z = 0;
         velocity.x = 0;
 
-        if (controller.isGrounded == true)
+        if (isGrounded == true)
         {
             velocity.y = 0;
         }
@@ -38,7 +52,7 @@ public class DroneMovement : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        this.transform.Translate(Vector3.forward * Time.deltaTime * speed);
+        this.transform.Translate(Vector3.right * Time.deltaTime * speed);
         ZeroOutVelocity();
 
 
@@ -46,19 +60,28 @@ public class DroneMovement : MonoBehaviour {
     public void LateUpdate()
     {
         velocity += Physics.gravity * Time.deltaTime;
-        controller.Move(velocity * Time.deltaTime);
+
     }
 
     public void Death ()
     {
-            GameObject clone = Instantiate(boom, this.transform.position, this.transform.rotation) as GameObject;
-            Destroy(this.gameObject);
+        GameObject clone = Instantiate(boom, this.transform.position, this.transform.rotation) as GameObject;
+        this.GetComponentInParent<EveryoneJumps>().bots.Remove(this.gameObject);
+        Destroy(this.gameObject);
     }
 
+    public void Collect()
+    {
+        this.GetComponentInParent<EveryoneJumps>().bots.Remove(this.gameObject);
+        Destroy(this.gameObject);
+    }
     public void Jump(float speed)
     {
-        Debug.Log("Input Received" + speed);
-        this.gameObject.GetComponent<Rigidbody>().AddForce(Vector3.up * speed);
+        if (isGrounded)
+        {
+            Debug.Log("Input Received" + speed);
+            this.gameObject.GetComponent<Rigidbody2D>().AddRelativeForce(Vector2.up * speed);
+        }
     }
 
 

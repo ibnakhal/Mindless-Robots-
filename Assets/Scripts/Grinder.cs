@@ -15,12 +15,12 @@ public class Grinder : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        this.transform.Rotate(Vector3.up * Time.deltaTime * speed);
+        this.transform.Rotate(Vector3.forward * Time.deltaTime * speed);
 
 
 	}
 
-    public void OnTriggerEnter(Collider Other)
+    public void OnTriggerEnter2D(Collider2D Other)
     {
         if(Other.tag == "Flock")
         {
