@@ -87,6 +87,15 @@
     <Compile Include="Assets\Scripts\Grinder.cs" />
     <Compile Include="Assets\Scripts\Manager.cs" />
     <Compile Include="Assets\Scripts\Spawn.cs" />
+    <Compile Include="Assets\Scripts\UI\ButtonSystem.cs" />
+    <Compile Include="Assets\Scripts\UI\CursorSetter.cs" />
+    <Compile Include="Assets\Scripts\UI\Ended.cs" />
+    <Compile Include="Assets\Scripts\UI\Fader.cs" />
+    <Compile Include="Assets\Scripts\UI\GameFade.cs" />
+    <Compile Include="Assets\Scripts\UI\MenuLoader.cs" />
+    <Compile Include="Assets\Scripts\UI\Pause.cs" />
+    <Compile Include="Assets\Scripts\UI\Timer.cs" />
+    <Compile Include="Assets\Scripts\UI\Wait.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Standard Assets\Characters\FirstPersonCharacter\FirstPersonCharacterGuidelines.txt" />
