@@ -32,6 +32,7 @@ public class Spawn : MonoBehaviour {
         if (spawnCount >= spawnNo)
         {
             active = false;
+            manager.GetComponent<Manager>().spawnActive = false;
         }
     }
 

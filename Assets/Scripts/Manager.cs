@@ -25,6 +25,8 @@ public class Manager : MonoBehaviour {
     private Text scoreText;
     [SerializeField]
     private float time;
+    [SerializeField]
+    public bool spawnActive = true;
 	void Start () {
         jumps = gameObject.GetComponent<EveryoneJumps>();
 	}
@@ -33,9 +35,12 @@ public class Manager : MonoBehaviour {
 	void Update ()
     {
         scoreText.text = ("Bots: " + collected + "/" + maxGoal);
-	    if (jumps.bots.Count <= 0 || jumps.bots ==null)
+        if (jumps.bots.Count <= 0 || jumps.bots == null)
         {
-            end = true;
+            if (!spawnActive)
+            {
+                end = true;
+            }
         }
         if(end)
         {

@@ -9,9 +9,11 @@ public class EveryoneJumps : MonoBehaviour {
     private DroneMovement move;
     [SerializeField]
     private float jumpSpeed;
+    [SerializeField]
+    private int var;
 	// Use this for initialization
 	void Start () {
-	
+//        Screen.height = var
 	}
 	
 	// Update is called once per frame
