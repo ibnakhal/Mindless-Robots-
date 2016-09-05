@@ -34,7 +34,7 @@ public class Manager : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
-        scoreText.text = ("Bots: " + collected + "/" + maxGoal);
+        scoreText.text = ("Bots: " + collected + "/" + goal);
         if (jumps.bots.Count <= 0 || jumps.bots == null)
         {
             if (!spawnActive)

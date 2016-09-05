@@ -50,7 +50,7 @@ public class DroneMovement : MonoBehaviour {
     }
     
 	// Update is called once per frame
-	void Update () {
+	void FixedUpdate () {
 
         this.transform.Translate(Vector3.right * Time.deltaTime * speed);
         ZeroOutVelocity();

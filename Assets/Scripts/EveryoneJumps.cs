@@ -11,24 +11,34 @@ public class EveryoneJumps : MonoBehaviour {
     private float jumpSpeed;
     [SerializeField]
     private int var;
+    [SerializeField]
+    private bool jumpTrigger;
 	// Use this for initialization
 	void Start () {
 //        Screen.height = var
 	}
-	
+    public void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space) && !jumpTrigger)
+        {
+            jumpTrigger = true;
+        }
+    }
 	// Update is called once per frame
-	void Update () {
+	void FixedUpdate () 
+            {
 
         
 
-		if (Input.GetKey(KeyCode.Space)) 
-		{
+		if(jumpTrigger)
+         {
             Debug.Log("Jump!");
            
             foreach (GameObject bot in bots)
             {
                 bot.GetComponent<DroneMovement>().Jump(jumpSpeed);
             }
+            jumpTrigger = false;
 
 		}
 
