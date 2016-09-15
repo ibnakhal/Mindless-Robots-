@@ -19,7 +19,7 @@ public class EveryoneJumps : MonoBehaviour {
 	}
     public void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && !jumpTrigger)
+        if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0) && !jumpTrigger)
         {
             jumpTrigger = true;
         }

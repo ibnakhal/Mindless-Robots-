@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class ButtonSystem : MonoBehaviour {
     [SerializeField]
@@ -13,7 +14,7 @@ public void Quit()
     }
     public void Campaign()
     {
-        Application.LoadLevel(CampaignLevel);
+        SceneManager.LoadScene(CampaignLevel);
     }
     public void Endless()
     {
