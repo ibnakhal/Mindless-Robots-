@@ -27,6 +27,11 @@ public class Manager : MonoBehaviour {
     private float time;
     [SerializeField]
     public bool spawnActive = true;
+
+    [SerializeField]
+    private Image stars;
+    [SerializeField]
+    private Sprite[] sprite;
 	void Start () {
         jumps = gameObject.GetComponent<EveryoneJumps>();
 	}
@@ -63,7 +68,21 @@ public class Manager : MonoBehaviour {
 
     public IEnumerator EndGame(string words, int level)
     {
-        gameText.text = words;
+        if(collected == (goal))
+        {
+            stars.gameObject.SetActive(true);
+            stars.sprite = sprite[0];
+        }
+        if (collected <= (maxGoal) && collected >= (goal))
+        {
+            stars.gameObject.SetActive(true);
+            stars.sprite = sprite[1];
+        }
+        if (collected == (maxGoal))
+        {
+            stars.gameObject.SetActive(true);
+            stars.sprite = sprite[2];
+        }
         yield return new WaitForSeconds(time);
         SceneManager.LoadScene(level);
     }
