@@ -14,9 +14,12 @@ public class DroneMovement : MonoBehaviour {
     private bool isGrounded;
 
 
+
     [Header("Effects")]
     [SerializeField]
     private GameObject boom;
+    [SerializeField]
+    private Vector3 explosionRotation;
 	// Use this for initialization
 	void Start () 
     {
@@ -65,7 +68,7 @@ public class DroneMovement : MonoBehaviour {
 
     public void Death ()
     {
-        GameObject clone = Instantiate(boom, this.transform.position, this.transform.rotation) as GameObject;
+        GameObject clone = Instantiate(boom, this.transform.position, Quaternion.identity) as GameObject;
         this.GetComponentInParent<EveryoneJumps>().bots.Remove(this.gameObject);
         Destroy(this.gameObject);
     }
