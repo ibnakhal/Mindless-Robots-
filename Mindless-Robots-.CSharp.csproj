@@ -84,12 +84,14 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\Animation.cs" />
     <Compile Include="Assets\Scripts\Collection.cs" />
     <Compile Include="Assets\Scripts\DroneMovement.cs" />
     <Compile Include="Assets\Scripts\EveryoneJumps.cs" />
     <Compile Include="Assets\Scripts\Grinder.cs" />
     <Compile Include="Assets\Scripts\Manager.cs" />
     <Compile Include="Assets\Scripts\Spawn.cs" />
+    <Compile Include="Assets\Scripts\SpriteAnimation.cs" />
     <Compile Include="Assets\Scripts\UI\ButtonSystem.cs" />
     <Compile Include="Assets\Scripts\UI\CursorSetter.cs" />
     <Compile Include="Assets\Scripts\UI\Ended.cs" />
