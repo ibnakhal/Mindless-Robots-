@@ -12,9 +12,9 @@ public void Quit()
     {
         Application.Quit();
     }
-    public void Campaign()
+    public void Campaign(int level)
     {
-        SceneManager.LoadScene(CampaignLevel);
+        SceneManager.LoadScene(level);
     }
     public void Endless()
     {
