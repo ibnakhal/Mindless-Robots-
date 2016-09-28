@@ -27,7 +27,7 @@ public class nOnPushSpi : MonoBehaviour {
             moving = true;
             this.gameObject.GetComponent<Rigidbody>().AddTorque(OneVector);
         }
-        if (Input.touchCount<=1 && Input.GetTouch(0).phase == TouchPhase.Ended)
+        if (Input.touchCount !=1 )
         {
             moving = false;
         }

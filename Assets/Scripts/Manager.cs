@@ -84,7 +84,10 @@ public class Manager : MonoBehaviour {
             stars.sprite = sprite[2];
         }
         GameObject pp = GameObject.FindGameObjectWithTag("pp");
-        pp.GetComponent<PlayPref>().Updoot(level);
+        if (pp.GetComponent<PlayPref>().curL < level)
+        {
+            pp.GetComponent<PlayPref>().Updoot(level);
+        }
         yield return new WaitForSeconds(time);
         SceneManager.LoadScene(level);
     }

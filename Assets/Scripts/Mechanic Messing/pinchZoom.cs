@@ -3,12 +3,12 @@ using System.Collections;
 
 public class pinchZoom : MonoBehaviour
 {
-    public float pZoomSpeed = .5f;
+    public float pZoomSpeed = 0.5f;
     public float oZoomSpeed = 0.5f;
     Camera curcam;
     public void Start()
     {
-        curcam = Camera.current;
+        curcam = Camera.main;
     }
     void Update()
     {
