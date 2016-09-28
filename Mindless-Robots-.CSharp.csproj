@@ -91,6 +91,9 @@
     <Compile Include="Assets\Scripts\Grinder.cs" />
     <Compile Include="Assets\Scripts\LevelKeeper.cs" />
     <Compile Include="Assets\Scripts\Manager.cs" />
+    <Compile Include="Assets\Scripts\Mechanic Messing\TouchTest.cs" />
+    <Compile Include="Assets\Scripts\Mechanic Messing\nOnPushSpi.cs" />
+    <Compile Include="Assets\Scripts\Mechanic Messing\pinchZoom.cs" />
     <Compile Include="Assets\Scripts\PlayPref.cs" />
     <Compile Include="Assets\Scripts\Spawn.cs" />
     <Compile Include="Assets\Scripts\SpriteAnimation.cs" />
