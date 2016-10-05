@@ -4,6 +4,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class Manager : MonoBehaviour {
+    [Header("Robot Stats")]
     [SerializeField]
     private int collected;
     [SerializeField]
@@ -11,6 +12,8 @@ public class Manager : MonoBehaviour {
     [SerializeField]
     private int maxGoal;
     private EveryoneJumps jumps;
+
+    [Header("End-Level Stats")]
     [SerializeField]
     private bool end = false;
     [SerializeField]
@@ -24,17 +27,22 @@ public class Manager : MonoBehaviour {
     [SerializeField]
     private Text scoreText;
     [SerializeField]
+    private Text goalText;
+    [SerializeField]
     private float time;
     [SerializeField]
     public bool spawnActive = true;
-
+    [Header("End-Level Images")]
     [SerializeField]
-    private Image stars;
+    private Image winImage;
+    [SerializeField]
+    private Image loseImage;
     [SerializeField]
     private Sprite[] sprite;
 	void Start () {
         jumps = gameObject.GetComponent<EveryoneJumps>();
-	}
+        goalText.text = ("Goal: " + goal);
+    }
 	
 	// Update is called once per frame
 	void Update ()
@@ -51,12 +59,11 @@ public class Manager : MonoBehaviour {
         {
             if(collected >= goal)
             {
-                StartCoroutine(EndGame(winText, nextLevel));
+                EndGame(winText);
             }
             else
             {
-
-                StartCoroutine(EndGame(loseText, SceneManager.GetActiveScene().buildIndex ));
+                EndGame(loseText);
             }
         }
 	}
@@ -66,32 +73,38 @@ public class Manager : MonoBehaviour {
     }
 
 
-    public IEnumerator EndGame(string words, int level)
+    public void EndGame(string words)
     {
         if(collected == (goal))
         {
-            stars.gameObject.SetActive(true);
-            stars.sprite = sprite[0];
+            winImage.gameObject.SetActive(true);
+            winImage.sprite = sprite[0];
         }
-        if (collected <= (maxGoal) && collected >= (goal))
+        if (collected < (maxGoal) && collected > (goal))
         {
-            stars.gameObject.SetActive(true);
-            stars.sprite = sprite[1];
+            winImage.gameObject.SetActive(true);
+            winImage.sprite = sprite[1];
         }
         if (collected == (maxGoal))
         {
-            stars.gameObject.SetActive(true);
-            stars.sprite = sprite[2];
+            winImage.gameObject.SetActive(true);
+            winImage.sprite = sprite[2];
+        }
+        else if (collected<goal)
+        {
+            loseImage.gameObject.SetActive(true);
+            gameText.text = loseText;
         }
         GameObject pp = GameObject.FindGameObjectWithTag("pp");
-        if (pp.GetComponent<PlayPref>().curL < level)
+        if (pp.GetComponent<PlayPref>().curL < (SceneManager.GetActiveScene().buildIndex+1))
         {
-            pp.GetComponent<PlayPref>().Updoot(level);
+            pp.GetComponent<PlayPref>().Updoot((SceneManager.GetActiveScene().buildIndex+1));
         }
-        yield return new WaitForSeconds(time);
-        SceneManager.LoadScene(level);
     }
 
-
+    public void SceneLoader(int level)
+    {
+        SceneManager.LoadScene(level);
+    }
 
 }
