@@ -19,6 +19,8 @@ public class Manager : MonoBehaviour {
     [SerializeField]
     private int nextLevel;
     [SerializeField]
+    private string levelKeyCode;
+    [SerializeField]
     private string winText;
     [SerializeField]
     private string loseText;
@@ -32,6 +34,7 @@ public class Manager : MonoBehaviour {
     private float time;
     [SerializeField]
     public bool spawnActive = true;
+
     [Header("End-Level Images")]
     [SerializeField]
     private Image winImage;
@@ -39,13 +42,20 @@ public class Manager : MonoBehaviour {
     private Image loseImage;
     [SerializeField]
     private Sprite[] sprite;
-	void Start () {
+
+
+    private PlayPref pp;
+
+
+    void Start () {
         jumps = gameObject.GetComponent<EveryoneJumps>();
         goalText.text = ("Goal: " + goal);
+        pp = GameObject.FindGameObjectWithTag("pp").GetComponent<PlayPref>();
+
     }
-	
-	// Update is called once per frame
-	void Update ()
+
+    // Update is called once per frame
+    void Update ()
     {
         scoreText.text = ("Bots: " + collected + "/" + goal);
         if (jumps.bots.Count <= 0 || jumps.bots == null)
@@ -79,26 +89,31 @@ public class Manager : MonoBehaviour {
         {
             winImage.gameObject.SetActive(true);
             winImage.sprite = sprite[0];
+            pp.LNSKey = levelKeyCode;
+            pp.star = 1;
         }
         if (collected < (maxGoal) && collected > (goal))
         {
             winImage.gameObject.SetActive(true);
             winImage.sprite = sprite[1];
+            pp.LNSKey = levelKeyCode;
+            pp.star = 2;
         }
         if (collected == (maxGoal))
         {
             winImage.gameObject.SetActive(true);
             winImage.sprite = sprite[2];
+            pp.LNSKey = levelKeyCode;
+            pp.star = 3;
         }
         else if (collected<goal)
         {
             loseImage.gameObject.SetActive(true);
             gameText.text = loseText;
         }
-        GameObject pp = GameObject.FindGameObjectWithTag("pp");
-        if (pp.GetComponent<PlayPref>().curL < (SceneManager.GetActiveScene().buildIndex+1))
+        if (pp.curL < (SceneManager.GetActiveScene().buildIndex+1))
         {
-            pp.GetComponent<PlayPref>().Updoot((SceneManager.GetActiveScene().buildIndex+1));
+            pp.Updoot((SceneManager.GetActiveScene().buildIndex+1));
         }
     }
 

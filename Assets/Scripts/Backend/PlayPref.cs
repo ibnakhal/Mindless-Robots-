@@ -7,18 +7,14 @@ public class PlayPref : MonoBehaviour {
     public int curL;
     string neme;
 
-    public List<int> level;
-
+    public string LNSKey;
+    public int star;
 
     // Use this for initialization
     void Start()
     {
         DontDestroyOnLoad(this.gameObject);
         curL = PlayerPrefs.GetInt(neme);
-        for (int x = 3; x < SceneManager.sceneCount; x++)
-        {
-            level.Add(x);
-        }
     }
 	
 	// Update is called once per frame
@@ -31,5 +27,15 @@ public class PlayPref : MonoBehaviour {
     {
         PlayerPrefs.SetInt(neme, level);
         PlayerPrefs.Save();
+    }
+    public void LevelUpdate()
+    {
+        PlayerPrefs.SetInt(LNSKey, star);
+        PlayerPrefs.Save();
+    }
+
+    public void GetStuff()
+    {
+        PlayerPrefs.GetInt(LNSKey, star);
     }
 }
