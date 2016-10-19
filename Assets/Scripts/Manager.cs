@@ -41,8 +41,9 @@ public class Manager : MonoBehaviour {
     [SerializeField]
     private Image loseImage;
     [SerializeField]
-    private Sprite[] sprite;
-
+    private Sprite sprite;
+    [SerializeField]
+    private Image[] gears;
 
     private PlayPref pp;
 
@@ -88,21 +89,24 @@ public class Manager : MonoBehaviour {
         if(collected == (goal))
         {
             winImage.gameObject.SetActive(true);
-            winImage.sprite = sprite[0];
+            //      winImage.sprite = sprite[0];
+            gears[0].sprite = sprite;
+            gears[1].sprite = sprite;
             pp.LNSKey = levelKeyCode;
             pp.star = 1;
         }
         if (collected < (maxGoal) && collected > (goal))
         {
             winImage.gameObject.SetActive(true);
-            winImage.sprite = sprite[1];
+            //           winImage.sprite = sprite[1];
+            gears[1].sprite = sprite;
             pp.LNSKey = levelKeyCode;
             pp.star = 2;
         }
         if (collected == (maxGoal))
         {
             winImage.gameObject.SetActive(true);
-            winImage.sprite = sprite[2];
+  //          winImage.sprite = sprite[2];
             pp.LNSKey = levelKeyCode;
             pp.star = 3;
         }
@@ -117,9 +121,17 @@ public class Manager : MonoBehaviour {
         }
     }
 
-    public void SceneLoader(int level)
+    public void SceneLoader()
     {
-        SceneManager.LoadScene(level);
+        SceneManager.LoadScene(nextLevel);
     }
+    public void Reset()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+    public void Menu()
+    {
+        SceneManager.LoadScene(1);
 
+    }
 }
