@@ -95,6 +95,7 @@
     <Compile Include="Assets\Scripts\Grinder.cs" />
     <Compile Include="Assets\Scripts\LevelKeeper.cs" />
     <Compile Include="Assets\Scripts\Manager.cs" />
+    <Compile Include="Assets\Scripts\MenuBotKi9ller.cs" />
     <Compile Include="Assets\Scripts\Spawn.cs" />
     <Compile Include="Assets\Scripts\SpriteAnimation.cs" />
     <Compile Include="Assets\Scripts\UI\ButtonSystem.cs" />
@@ -105,6 +106,7 @@
     <Compile Include="Assets\Scripts\UI\LevelStarsNewBehaviourScript.cs" />
     <Compile Include="Assets\Scripts\UI\LevelStarter.cs" />
     <Compile Include="Assets\Scripts\UI\MenuLoader.cs" />
+    <Compile Include="Assets\Scripts\UI\ParticleEnder.cs" />
     <Compile Include="Assets\Scripts\UI\Pause.cs" />
     <Compile Include="Assets\Scripts\UI\Timer.cs" />
     <Compile Include="Assets\Scripts\UI\Wait.cs" />

@@ -26,7 +26,7 @@ public class CursorSetter : MonoBehaviour {
 	{
         
 		yield return new WaitForSeconds(time);
-        Debug.Log(Cursor.visible);
+  //      Debug.Log(Cursor.visible);
 			Cursor.visible = visibility;
 	}
 }

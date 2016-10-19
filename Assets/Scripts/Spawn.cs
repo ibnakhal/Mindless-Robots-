@@ -41,10 +41,13 @@ public class Spawn : MonoBehaviour {
         while (active)
         {
             GameObject clone = Instantiate(bot, this.transform.position, this.transform.rotation) as GameObject;
-            clone.transform.SetParent(manager.transform);
-            jumpCommander.bots.Add(clone);
+            if (manager != null)
+            {
+                clone.transform.SetParent(manager.transform);
+                jumpCommander.bots.Add(clone);
+                spawnCount++;
+            }
             yield return new WaitForSeconds(wait);
-            spawnCount++;
 
         }
     }

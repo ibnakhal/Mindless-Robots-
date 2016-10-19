@@ -28,7 +28,7 @@ public class DroneMovement : MonoBehaviour {
 
     public void OnCollisionEnter2D(Collision2D collided)
     {
-        print(collided.collider.tag);
+ //       print(collided.collider.tag);
         if(collided.collider.gameObject.tag == "Floor")
         {
             isGrounded = true;
