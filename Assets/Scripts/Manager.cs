@@ -58,6 +58,10 @@ public class Manager : MonoBehaviour {
     // Update is called once per frame
     void Update ()
     {
+        if(Input.GetKeyDown("escape"))
+        {
+            Menu();
+        }
         scoreText.text = ("Bots: " + collected + "/" + goal);
         if (jumps.bots.Count <= 0 || jumps.bots == null)
         {
@@ -77,13 +81,14 @@ public class Manager : MonoBehaviour {
                 EndGame(loseText);
             }
         }
-	}
+        
+    }
     public void Collected()
     {
         collected++;
     }
 
-
+    
     public void EndGame(string words)
     {
         if(collected == (goal))
