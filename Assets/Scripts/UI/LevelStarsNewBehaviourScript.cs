@@ -6,14 +6,16 @@ public class LevelStarsNewBehaviourScript : MonoBehaviour {
     public string[] levelCode;
     public int[] levelStar;
     // Use this for initialization
-    void Start () {
+    public void Start () {
         pp = GameObject.FindGameObjectWithTag("pp").GetComponent<PlayPref>();
-
-        for(int x = 0; x < (SceneManager.sceneCount-3); x++ )
+        Debug.Log("Cycling Stars");
+        Debug.Log(pp.curL);
+        for(int x = 0; x < (pp.curL-3); x++ )
         {
-            pp.LNSKey = levelCode[x];
+            pp.LNSKey = levelCode[x].ToString();
             pp.GetStuff();
             levelStar[x] = pp.star;
+            Debug.Log(levelCode[x] + " Score: " + levelStar[x]);
 
         } 
 
