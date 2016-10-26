@@ -52,6 +52,7 @@ public class Manager : MonoBehaviour {
         jumps = gameObject.GetComponent<EveryoneJumps>();
         goalText.text = ("Goal: " + goal);
         pp = GameObject.FindGameObjectWithTag("pp").GetComponent<PlayPref>();
+        Debug.Log(pp.name);
 
     }
 
@@ -120,9 +121,10 @@ public class Manager : MonoBehaviour {
             loseImage.gameObject.SetActive(true);
             gameText.text = loseText;
         }
-        if (pp.curL < (SceneManager.GetActiveScene().buildIndex+1))
+        pp.LevelUpdate();
+        if (pp.curL < (nextLevel))
         {
-            pp.Updoot((SceneManager.GetActiveScene().buildIndex+1));
+            pp.Updoot((nextLevel));
         }
     }
 

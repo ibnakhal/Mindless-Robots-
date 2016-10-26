@@ -26,16 +26,21 @@ public class PlayPref : MonoBehaviour {
     public void Updoot(int level)
     {
         PlayerPrefs.SetInt(neme, level);
+        Debug.Log("Saving: Scene " + level);
         PlayerPrefs.Save();
+        curL = PlayerPrefs.GetInt(neme);
+
     }
     public void LevelUpdate()
     {
         PlayerPrefs.SetInt(LNSKey, star);
+        Debug.Log("Level Key is: " + LNSKey);
         PlayerPrefs.Save();
     }
 
     public void GetStuff()
     {
-        PlayerPrefs.GetInt(LNSKey, star);
+        Debug.Log(LNSKey);
+       star = PlayerPrefs.GetInt(LNSKey);
     }
 }
