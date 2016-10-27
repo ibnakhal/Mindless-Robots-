@@ -1,8 +1,4 @@
 sceneSetups:
-<<<<<<< HEAD
 - path: Assets/Scenes/Startup/Shop.unity
-=======
-- path: Assets/Scenes/Level 11.unity
->>>>>>> origin/master
   isLoaded: 1
   isActive: 1
