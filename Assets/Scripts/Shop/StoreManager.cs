@@ -61,6 +61,7 @@ public class StoreManager : MonoBehaviour , IStoreListener
             ConfigurationBuilder storeBuider = ConfigurationBuilder.Instance(StandardPurchasingModule.Instance());
 
             storeBuider.AddProduct("com.BlackTesseract.MindlessRobots.LP1", ProductType.NonConsumable);
+            storeBuider.AddProduct("com.BlackTesseract.MindlessRobots.LP2", ProductType.NonConsumable);
 
             //Initialize the store.
             //first parameter indicates this script is for response processing
@@ -162,11 +163,11 @@ public class StoreManager : MonoBehaviour , IStoreListener
 
     }
 
-    public void BuyButton()
+    public void BuyButton(int listNum)
     {
         //if(GUILayout.Button("Buy", GUILayout.MinHeight(25)))
         {
-            Product product = s_store_Controller.products.WithID("com.BlackTesseract.MindlessRobots.LP1");
+            Product product = s_store_Controller.products.WithID(m_skus[listNum]);
             s_store_Controller.InitiatePurchase(product);
         }
     }

@@ -13,7 +13,9 @@ public class LevelKeeper : MonoBehaviour {
         for (int x = 0; x<(pp.curL-mod); x++)
         {
             buottons[x].GetComponent<Button>().interactable = true;
+            buottons[x].GetComponentInChildren<Text>().color = Color.white;
         }
+        //NOTE: Have here some store integration. if you don't own it don't play it
 	}
 	
 	// Update is called once per frame

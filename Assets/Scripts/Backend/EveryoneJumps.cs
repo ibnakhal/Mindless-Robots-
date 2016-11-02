@@ -13,6 +13,8 @@ public class EveryoneJumps : MonoBehaviour {
     private int var;
     [SerializeField]
     private bool jumpTrigger;
+    [SerializeField]
+    private AudioSource thisAudio;
 	// Use this for initialization
 	void Start () {
 //        Screen.height = var
@@ -37,6 +39,7 @@ public class EveryoneJumps : MonoBehaviour {
             foreach (GameObject bot in bots)
             {
                 bot.GetComponent<DroneMovement>().Jump(jumpSpeed);
+                thisAudio.Play();
             }
             jumpTrigger = false;
 
