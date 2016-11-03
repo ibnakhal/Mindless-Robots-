@@ -10,10 +10,15 @@ public class LevelKeeper : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         pp = GameObject.FindGameObjectWithTag("pp").GetComponent<PlayPref>();
-        for (int x = 0; x<(pp.curL-mod); x++)
+        for (int x = 0; x < (pp.curL - mod); x++)
         {
+
             buottons[x].GetComponent<Button>().interactable = true;
             buottons[x].GetComponentInChildren<Text>().color = Color.white;
+            if (!string.IsNullOrEmpty(buottons[x].GetComponent<levelbuttonScreen>().key))
+            {
+                buottons[x].GetComponent<levelbuttonScreen>().GetPurchasedLevels();
+            }
         }
         //NOTE: Have here some store integration. if you don't own it don't play it
 	}

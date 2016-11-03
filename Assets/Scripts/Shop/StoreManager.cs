@@ -18,13 +18,27 @@ public class StoreManager : MonoBehaviour , IStoreListener
 {
 
 
-    [System.Serializable]
+    [Serializable]
     private class UIInfo
     {
         public Text tileText;
         public Text priceText;
         public Text descriptionText;
+        public Button buyButton;
+        public Image icon;
     }
+
+    [Serializable]
+    private class ProductInfo
+    {
+        public string sku;
+        public ProductType type;
+        public string iconUrl;
+        public string purchaseFunction;
+    }
+
+    [SerializeField]
+    private ProductInfo[] m_productInfos = null;
 
     [SerializeField]
     private UIInfo[] m_uiRefernces = null;
@@ -38,10 +52,11 @@ public class StoreManager : MonoBehaviour , IStoreListener
     /// extension provider
     /// </summary>
     private static IExtensionProvider s_extensionsProvider;
+      
 
 
-    [SerializeField]
-    private string[] m_skus = new string[] { "com.BlackTesseract.MindlessRobots.LP1" };
+  //  [SerializeField]
+   // private string[] m_skus = new string[] { "com.BlackTesseract.MindlessRobots.LP1" };
 
     private static ProductCollection s_pruductCollection = null;
 
@@ -55,13 +70,27 @@ public class StoreManager : MonoBehaviour , IStoreListener
     private void Awake()
     {
 
+
         if(s_store_Controller == null)
         {
 
             ConfigurationBuilder storeBuider = ConfigurationBuilder.Instance(StandardPurchasingModule.Instance());
 
-            storeBuider.AddProduct("com.BlackTesseract.MindlessRobots.LP1", ProductType.NonConsumable);
-            storeBuider.AddProduct("com.BlackTesseract.MindlessRobots.LP2", ProductType.NonConsumable);
+            int productCount = m_productInfos.Length;
+            for(int i = 0; i< productCount; ++i)
+            {
+                // get the next product from the array
+                ProductInfo currentProduct = m_productInfos[i];
+                // pass the info to the builder
+                storeBuider.AddProduct(currentProduct.sku, currentProduct.type);
+
+                StartCoroutine(GetIcon(currentProduct.iconUrl, i));
+            }
+
+           // storeBuider.AddProduct("com.BlackTesseract.MindlessRobots.LP1", ProductType.NonConsumable);
+          //  storeBuider.AddProduct("com.BlackTesseract.MindlessRobots.LP2", ProductType.NonConsumable);
+
+
 
             //Initialize the store.
             //first parameter indicates this script is for response processing
@@ -75,9 +104,35 @@ public class StoreManager : MonoBehaviour , IStoreListener
 
     }
 
+
+    private IEnumerator GetIcon(string url, int panelNumber)
+    {
+        // send the request, wait until it's done
+        WWW internetRequest = new WWW(url);
+        yield return internetRequest;
+        Texture2D Text2D = internetRequest.texture;
+
+        Rect textureCoordinates = new Rect(0, 0, Text2D.width, Text2D.height);
+
+        Sprite newsprite = Sprite.Create(Text2D, textureCoordinates,  Vector2.zero);
+
+        m_uiRefernces[panelNumber].icon.sprite = newsprite;
+    }
+
+
     private void Update()
     {
+        if (s_store_Controller == null)
+        {
+            m_storePanel.SetActive(false);
+            //make a loading thing here
 
+        }
+        else
+        {
+            m_storePanel.SetActive(true);
+
+        }
     }
     /// <summary>
     /// Successful initialization
@@ -96,6 +151,7 @@ public class StoreManager : MonoBehaviour , IStoreListener
         PopulateUI();
 
     }
+
 
     private void PopulateUI()
     { 
@@ -126,7 +182,6 @@ public class StoreManager : MonoBehaviour , IStoreListener
             uiInfo.priceText.text = price;
             uiInfo.descriptionText.text = description;
 
-
         }
     }
     /// <summary>
@@ -148,6 +203,25 @@ public class StoreManager : MonoBehaviour , IStoreListener
     {
         Debug.Log("Purchased!");
 
+
+
+        Product purchasedProduct = e.purchasedProduct;
+
+        //check the sku
+        ProductDefinition productDefinition = purchasedProduct.definition;
+        string purchasedSku = productDefinition.id;
+
+
+
+        int productCount = m_productInfos.Length;
+        for (int i = 0; i< productCount; ++i)
+        {
+            if(m_productInfos[i].sku == purchasedSku)
+            {
+                //playerpref unlock here...?
+                pp(m_productInfos[i].purchaseFunction, 1);
+            }
+        }
         //return that the process was a success.
         return PurchaseProcessingResult.Complete;
     }
@@ -163,13 +237,24 @@ public class StoreManager : MonoBehaviour , IStoreListener
 
     }
 
-    public void BuyButton(int listNum)
+    public void _Buy(int productIndex)
     {
+        if(productIndex>= m_productInfos.Length)
+        {
+            // no item can exist here leave
+            return;
+        }
         //if(GUILayout.Button("Buy", GUILayout.MinHeight(25)))
         {
-            Product product = s_store_Controller.products.WithID(m_skus[listNum]);
+            Product product = s_store_Controller.products.WithID(m_productInfos[productIndex].sku);
             s_store_Controller.InitiatePurchase(product);
         }
+    }
+
+
+    public void pp (string key, int sitch)
+    {
+        PlayerPrefs.SetInt(key, sitch);  
     }
 
     //========================================

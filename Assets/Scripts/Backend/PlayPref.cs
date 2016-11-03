@@ -43,4 +43,6 @@ public class PlayPref : MonoBehaviour {
         Debug.Log(LNSKey);
        star = PlayerPrefs.GetInt(LNSKey);
     }
+
+
 }
