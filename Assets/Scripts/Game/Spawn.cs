@@ -23,7 +23,7 @@ public class Spawn : MonoBehaviour {
 	void Start () {
         spawnCount = 0;
         StartCoroutine(Spawning());
-
+        spawnNo = manager.GetComponent<Manager>().SpawnCount;
 	}
 	
 	// Update is called once per frame

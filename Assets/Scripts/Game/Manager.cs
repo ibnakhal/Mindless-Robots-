@@ -2,7 +2,7 @@
 using System.Collections;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-
+using UnityEngine.Advertisements;
 public class Manager : MonoBehaviour {
     [Header("Robot Stats")]
     [SerializeField]
@@ -12,12 +12,16 @@ public class Manager : MonoBehaviour {
     [SerializeField]
     private int maxGoal;
     private EveryoneJumps jumps;
+    [SerializeField]
+    public int SpawnCount = 6;
 
     [Header("End-Level Stats")]
     [SerializeField]
     private bool end = false;
     [SerializeField]
     private int nextLevel;
+    [SerializeField]
+    private int finalizedLevel;
     [SerializeField]
     private string levelKeyCode;
     [SerializeField]
@@ -47,16 +51,29 @@ public class Manager : MonoBehaviour {
 
     private PlayPref pp;
 
+    private SpawnNo spawnNo;
 
-    void Start () {
+    [SerializeField]
+    private bool adShown = false;
+
+
+    public void Awake()
+    {
+        spawnNo = GameObject.FindGameObjectWithTag("pp").GetComponent<SpawnNo>();
+        if (spawnNo.adWatched)
+        {
+            SpawnCount += 1;
+        }
+    }
+
+    void Start ()
+    {
         jumps = gameObject.GetComponent<EveryoneJumps>();
         goalText.text = ("Goal: " + goal);
         pp = GameObject.FindGameObjectWithTag("pp").GetComponent<PlayPref>();
         Debug.Log(pp.name);
-
     }
 
-    // Update is called once per frame
     void Update ()
     {
         if(Input.GetKeyDown("escape"))
@@ -84,12 +101,12 @@ public class Manager : MonoBehaviour {
         }
         
     }
+
     public void Collected()
     {
         collected++;
     }
 
-    
     public void EndGame(string words)
     {
         if(collected == (goal))
@@ -130,15 +147,68 @@ public class Manager : MonoBehaviour {
 
     public void SceneLoader()
     {
-        SceneManager.LoadScene(nextLevel);
+        if (!adShown)
+        {
+            adShown = true;
+            ShowRewardedAd();
+        }
+        finalizedLevel = nextLevel;
     }
+
     public void Reset()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        if (!adShown)
+        {
+            adShown = true;
+            ShowAd();
+        }
+
+        finalizedLevel = SceneManager.GetActiveScene().buildIndex;
     }
+
     public void Menu()
     {
         SceneManager.LoadScene(1);
 
+    }
+
+    public void ShowAd()
+    {
+        if (Advertisement.IsReady())
+        {
+            Advertisement.Show();
+        }
+    }
+
+    public void ShowRewardedAd()
+    {
+        ShowOptions options = new ShowOptions();
+        options.resultCallback = OnVideoComplete;
+        Advertisement.Show("rewardedVideo", options);
+    }
+
+    private void OnVideoComplete(ShowResult result)
+
+    {
+        switch (result)
+        {
+            case ShowResult.Failed:
+                Debug.Log("Failed");
+                spawnNo.adWatched = false;
+                SceneManager.LoadScene(finalizedLevel);
+                break;
+
+            case ShowResult.Finished:
+                Debug.Log("Finsihed");
+                spawnNo.adWatched = true;
+                SceneManager.LoadScene(finalizedLevel);
+                break;
+
+            case ShowResult.Skipped:
+                Debug.Log("Skipped");
+                spawnNo.adWatched = false;
+                SceneManager.LoadScene(finalizedLevel);
+                break;
+        }
     }
 }

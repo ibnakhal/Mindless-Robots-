@@ -35,6 +35,11 @@ public class StoreManager : MonoBehaviour , IStoreListener
         public ProductType type;
         public string iconUrl;
         public string purchaseFunction;
+
+
+        public bool WasPurchased { get { return isPurchased; } set { isPurchased = value; } }
+        private bool isPurchased = false;
+
     }
 
     [SerializeField]
@@ -167,11 +172,22 @@ public class StoreManager : MonoBehaviour , IStoreListener
                 continue;
             }
             Product product = products[i];
+
+            bool hasBeenPurchased = product.hasReceipt;
+            ProductType type = product.definition.type;
+
             ProductMetadata productData = product.metadata;
 
             string title = productData.localizedTitle;
             string price = productData.localizedPriceString;
             string description = productData.localizedDescription;
+
+            if (hasBeenPurchased && type != ProductType.Consumable)
+            {
+                //write to player prefs
+                Debug.Log("ERROR. " + title + " was purchased");
+
+            }
 
             Debug.Log("Title: " + title + ", Price: " + price + ", Description: " + description);
 
