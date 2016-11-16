@@ -1,4 +1,5 @@
-﻿/**
+﻿#if AD_ENABLED
+/**
  * $File: AdManager.cs $
  * $Date: #CREATIONDATE# $
  * $Revision: $
@@ -16,18 +17,6 @@ using UnityEngine.Advertisements;
 public class AdManager 
     : MonoBehaviour 
 {
-
-    private void Awake()
-    {
-
-
-    }
-
-    private void Update()
-    {
-
-
-    }
 
     public void ShowRewardedAd()
     {
@@ -55,3 +44,4 @@ public class AdManager
         }
     }
 }
+#endif

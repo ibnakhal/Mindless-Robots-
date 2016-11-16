@@ -1,4 +1,5 @@
-﻿/**
+﻿#if STORE_ENABLED
+/**
  * $File: StoreManager.cs $
  * $Date: #CREATIONDATE# $
  * $Revision: $
@@ -286,3 +287,4 @@ public class StoreManager : MonoBehaviour , IStoreListener
     // Private Functions
 
 }
+#endif

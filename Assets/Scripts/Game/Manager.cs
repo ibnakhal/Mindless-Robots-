@@ -39,6 +39,7 @@ public class Manager : MonoBehaviour {
     [SerializeField]
     public bool spawnActive = true;
 
+
     [Header("End-Level Images")]
     [SerializeField]
     private Image winImage;
@@ -59,11 +60,20 @@ public class Manager : MonoBehaviour {
 
     public void Awake()
     {
-        spawnNo = GameObject.FindGameObjectWithTag("pp").GetComponent<SpawnNo>();
-        if (spawnNo.adWatched)
+#if AD_ENABLED
+        if (GameObject.FindGameObjectWithTag("pp") != null)
         {
-            SpawnCount += 1;
+            spawnNo = GameObject.FindGameObjectWithTag("pp").GetComponent<SpawnNo>();
+            if (spawnNo.adWatched)
+            {
+                SpawnCount += 1;
+            }
         }
+        else
+        {
+            SpawnCount = 6;
+        }
+#endif
     }
 
     void Start ()
@@ -147,22 +157,25 @@ public class Manager : MonoBehaviour {
 
     public void SceneLoader()
     {
+#if AD_ENABLED
         if (!adShown)
         {
             adShown = true;
             ShowRewardedAd();
         }
+#endif
         finalizedLevel = nextLevel;
     }
 
     public void Reset()
     {
+#if AD_ENABLED
         if (!adShown)
         {
             adShown = true;
             ShowAd();
         }
-
+#endif
         finalizedLevel = SceneManager.GetActiveScene().buildIndex;
     }
 
@@ -171,7 +184,7 @@ public class Manager : MonoBehaviour {
         SceneManager.LoadScene(1);
 
     }
-
+#if AD_ENABLED
     public void ShowAd()
     {
         if (Advertisement.IsReady())
@@ -179,7 +192,6 @@ public class Manager : MonoBehaviour {
             Advertisement.Show();
         }
     }
-
     public void ShowRewardedAd()
     {
         ShowOptions options = new ShowOptions();
@@ -211,4 +223,6 @@ public class Manager : MonoBehaviour {
                 break;
         }
     }
+#endif
+
 }

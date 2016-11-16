@@ -18,12 +18,16 @@ public class Spawn : MonoBehaviour {
     private EveryoneJumps jumpCommander;
     [SerializeField]
     private GameObject manager;
-
+    [SerializeField]
+    private bool alone = false;
 	// Use this for initialization
 	void Start () {
         spawnCount = 0;
         StartCoroutine(Spawning());
-        spawnNo = manager.GetComponent<Manager>().SpawnCount;
+   //     if (manager != null)
+ //       {
+            spawnNo = manager.GetComponent<Manager>().SpawnCount;
+ //       }
 	}
 	
 	// Update is called once per frame

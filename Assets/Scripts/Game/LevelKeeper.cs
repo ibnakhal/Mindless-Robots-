@@ -15,10 +15,12 @@ public class LevelKeeper : MonoBehaviour {
 
             buottons[x].GetComponent<Button>().interactable = true;
             buottons[x].GetComponentInChildren<Text>().color = Color.white;
+#if STORE_ENABLED
             if (!string.IsNullOrEmpty(buottons[x].GetComponent<levelbuttonScreen>().key))
             {
                 buottons[x].GetComponent<levelbuttonScreen>().GetPurchasedLevels();
             }
+#endif
         }
         //NOTE: Have here some store integration. if you don't own it don't play it
 	}
