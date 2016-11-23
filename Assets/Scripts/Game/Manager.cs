@@ -157,26 +157,35 @@ public class Manager : MonoBehaviour {
 
     public void SceneLoader()
     {
-#if AD_ENABLED
+        finalizedLevel = nextLevel;
         if (!adShown)
         {
+#if AD_ENABLED
             adShown = true;
             ShowRewardedAd();
-        }
 #endif
-        finalizedLevel = nextLevel;
+            if (!adShown)
+            {
+                LoadLevel(finalizedLevel);
+            }
+        }
     }
 
     public void Reset()
     {
-#if AD_ENABLED
+        finalizedLevel = SceneManager.GetActiveScene().buildIndex;
         if (!adShown)
         {
+
+#if AD_ENABLED
             adShown = true;
             ShowAd();
-        }
 #endif
-        finalizedLevel = SceneManager.GetActiveScene().buildIndex;
+            if (!adShown)
+            {
+                LoadLevel(finalizedLevel);
+            }
+        }
     }
 
     public void Menu()
@@ -224,5 +233,8 @@ public class Manager : MonoBehaviour {
         }
     }
 #endif
-
+    public void LoadLevel(int scene)
+    {
+        SceneManager.LoadScene(scene);
+    }
 }

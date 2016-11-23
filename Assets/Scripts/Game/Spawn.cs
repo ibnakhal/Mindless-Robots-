@@ -24,10 +24,10 @@ public class Spawn : MonoBehaviour {
 	void Start () {
         spawnCount = 0;
         StartCoroutine(Spawning());
-   //     if (manager != null)
- //       {
+        if (manager != null)
+        {
             spawnNo = manager.GetComponent<Manager>().SpawnCount;
- //       }
+        }
 	}
 	
 	// Update is called once per frame
