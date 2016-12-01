@@ -65,7 +65,7 @@
                 <category android:name="android.intent.category.BROWSABLE" />
 
                 <data
-                    android:host="com.amazon.ags.gamecirclesampleapp"
+                    android:host="com.BlackTesseract.MindlessRobots"
                     android:scheme="amzn" />
             </intent-filter>
         </activity>

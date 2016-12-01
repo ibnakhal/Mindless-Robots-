@@ -1,18 +1,6 @@
-﻿/**
- * $File: DataTest.cs $
- * $Date: #CREATIONDATE# $
- * $Revision: $
- * $Creator: Jen-Chieh Shen $
- * $Notice: See LICENSE.txt for modification and distribution information 
- *	                 Copyright (c) 2016 by Shen, Jen-Chieh $
- */
-using UnityEngine;
+﻿using UnityEngine;
 using System.Collections;
 
-
-/// <summary>
-/// 
-/// </summary>
 public class DataTest 
     : MonoBehaviour
 {
@@ -27,8 +15,13 @@ public class DataTest
     private IEnumerator DelayedLoadAndSave()
     {
         yield return new WaitForSeconds(3);
+
         float testValue;
-      //  bool success = m_dataManager.LoadFloat
+        bool success = m_dataManager.LoadFloat("Test", out testValue);
+        print(testValue);
+        testValue += 100;
+        //  bool success = m_dataManager.LoadFloat
+        m_dataManager.SaveFloat("Test", testValue);   
     }
    
     

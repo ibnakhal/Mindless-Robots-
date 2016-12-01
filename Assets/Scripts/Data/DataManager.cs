@@ -14,6 +14,7 @@ public class DataManager
 
     private void Awake()
     {
+        DontDestroyOnLoad(this.gameObject);
         if (s_loadedPlugin != null)
             return;
 

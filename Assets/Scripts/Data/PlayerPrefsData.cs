@@ -20,6 +20,6 @@ public class PlayerPrefsData
     public override bool SaveFloat(string name, float newValue)
     {
         PlayerPrefs.SetFloat(name, newValue);
-        return false;
+        return true;
     }
 }
