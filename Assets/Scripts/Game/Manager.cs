@@ -136,7 +136,7 @@ public class Manager : MonoBehaviour {
             pp.LNSKey = levelKeyCode;
             pp.star = 2;
         }
-        if (collected == (maxGoal))
+        if (collected >= (maxGoal))
         {
             winImage.gameObject.SetActive(true);
   //          winImage.sprite = sprite[2];
@@ -174,12 +174,13 @@ public class Manager : MonoBehaviour {
     public void Reset()
     {
         finalizedLevel = SceneManager.GetActiveScene().buildIndex;
+        Debug.Log(finalizedLevel);
         if (!adShown)
         {
 
 #if AD_ENABLED
             adShown = true;
-            ShowAd();
+            ShowRewardedAd();
 #endif
             if (!adShown)
             {
@@ -217,17 +218,20 @@ public class Manager : MonoBehaviour {
                 Debug.Log("Failed");
                 spawnNo.adWatched = false;
                 SceneManager.LoadScene(finalizedLevel);
+                adShown = false;
                 break;
 
             case ShowResult.Finished:
                 Debug.Log("Finsihed");
                 spawnNo.adWatched = true;
+                adShown = false;
                 SceneManager.LoadScene(finalizedLevel);
                 break;
 
             case ShowResult.Skipped:
                 Debug.Log("Skipped");
                 spawnNo.adWatched = false;
+                adShown = false;
                 SceneManager.LoadScene(finalizedLevel);
                 break;
         }
