@@ -38,7 +38,8 @@ public class Manager : MonoBehaviour {
     private float time;
     [SerializeField]
     public bool spawnActive = true;
-
+    [SerializeField]
+    private bool lastLevel = false;
 
     [Header("End-Level Images")]
     [SerializeField]
@@ -74,12 +75,16 @@ public class Manager : MonoBehaviour {
             SpawnCount = 6;
         }
 #endif
+        if(!lastLevel)
+        {
+            nextLevel = (SceneManager.GetActiveScene().buildIndex + 1);
+        }
     }
 
     void Start ()
     {
         jumps = gameObject.GetComponent<EveryoneJumps>();
-        goalText.text = ("Goal: " + goal);
+        goalText.text = ("Goal: " + goal + "\n 3 Stars: " + maxGoal);
         pp = GameObject.FindGameObjectWithTag("pp").GetComponent<PlayPref>();
         Debug.Log(pp.name);
     }
