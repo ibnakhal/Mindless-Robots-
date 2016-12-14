@@ -109,6 +109,7 @@
     <Compile Include="Assets\Scripts\Data\DataTest.cs" />
     <Compile Include="Assets\Scripts\Data\GameCircleData.cs" />
     <Compile Include="Assets\Scripts\Data\PlayerPrefsData.cs" />
+    <Compile Include="Assets\Scripts\DontOnLoad.cs" />
     <Compile Include="Assets\Scripts\Game\Animation.cs" />
     <Compile Include="Assets\Scripts\Game\Collection.cs" />
     <Compile Include="Assets\Scripts\Game\DroneMovement.cs" />
