@@ -11,7 +11,7 @@ public class PlayPref : MonoBehaviour {
     public int star;
 
     // Use this for initialization
-    void Start()
+    void Awake()
     {
         DontDestroyOnLoad(this.gameObject);
         curL = PlayerPrefs.GetInt(neme);

@@ -120,6 +120,7 @@
     <Compile Include="Assets\Scripts\Game\Spawn.cs" />
     <Compile Include="Assets\Scripts\Game\SpawnNo.cs" />
     <Compile Include="Assets\Scripts\Game\SpriteAnimation.cs" />
+    <Compile Include="Assets\Scripts\MusicActivate.cs" />
     <Compile Include="Assets\Scripts\Shop\StoreManager.cs" />
     <Compile Include="Assets\Scripts\UI\ButtonSystem.cs" />
     <Compile Include="Assets\Scripts\UI\CursorSetter.cs" />
