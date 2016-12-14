@@ -50,6 +50,9 @@ public class Manager : MonoBehaviour {
     private Sprite sprite;
     [SerializeField]
     private Image[] gears;
+    [SerializeField]
+    private GameObject adPanel;
+    private bool panelAdEnabled;
 
     private PlayPref pp;
 
@@ -160,6 +163,23 @@ public class Manager : MonoBehaviour {
         }
     }
 
+    public void adPaneled()
+    {
+#if AD_ENABLED
+        panelAdEnabled = true;
+#endif
+        if (panelAdEnabled)
+        {
+            adPanel.SetActive(true);
+        }
+        else
+        {
+            SceneLoader();
+        }
+
+    }
+
+
     public void SceneLoader()
     {
         finalizedLevel = nextLevel;
@@ -180,18 +200,8 @@ public class Manager : MonoBehaviour {
     {
         finalizedLevel = SceneManager.GetActiveScene().buildIndex;
         Debug.Log(finalizedLevel);
-        if (!adShown)
-        {
 
-#if AD_ENABLED
-            adShown = true;
-            ShowRewardedAd();
-#endif
-            if (!adShown)
-            {
-                LoadLevel(finalizedLevel);
-            }
-        }
+        LoadLevel(finalizedLevel);
     }
 
     public void Menu()
@@ -245,5 +255,11 @@ public class Manager : MonoBehaviour {
     public void LoadLevel(int scene)
     {
         SceneManager.LoadScene(scene);
+    }
+
+    public void nyet()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+
     }
 }
